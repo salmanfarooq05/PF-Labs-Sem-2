@@ -1,0 +1,116 @@
+#include <iostream>
+//#include <fstream>
+//using namespace std;
+//int main() {
+//	int num1, num2, sum;
+//	cout << "Enter two numbers: ";
+//	cin >> num1 >> num2;
+//	sum = num1 + num2;
+//	ofstream outFile("sum.txt");
+//	if (outFile.is_open()) {
+//		outFile << "The sum of " << num1 << " and " << num2 << " is " << sum << endl;
+//		outFile.close(); 
+//		cout << "Sum has been written to sum.txt" << endl;
+//	}
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<fstream>
+//using namespace std;
+//int main()
+//{
+//	char ch;
+//	cout << "enter a single character:" << endl;
+//	cin >> ch;
+//	cout << "the character is:" << ch << endl;
+//	ofstream fout;
+//	fout.open("output_1.txt");
+//	fout << "the character is:" << ch << endl;
+//	fout.close();
+//	system("pause);
+//		return 0;
+//
+//}
+
+
+
+
+//#include<iostream>
+//#include<fstream>
+//using namespace std;
+//int main()
+//{
+//	ofstream fout;
+//	fout.open("output_2.txt");
+//	int num[5] = {};
+//	cout << "enter five numbers:" << endl;
+//
+//	for (int i = 1; i < 5; i++){
+//		cin >> num[i];
+//	}
+//	cout << "the number is " << endl;
+//	for (int j = 0; j < 5; j++){
+//		cout << num[j] << endl;
+//		fout << num[j] << endl;
+//	}
+//	fout.close();
+//	system("pause");
+//	return 0;
+//
+//}
+//
+//
+
+
+
+//#include<iostream>
+//#include<fstream>
+//#include<cstring>
+//using namespace std;
+//int main()
+//{
+//	ofstream fout;
+//	fout.open("output_3.txt");
+//	int age, salary;
+//	char str[100] = {};
+//	cout << "enter your name" << endl;
+//	cin.getline(str, 100);
+//	cout << "enter your age:" <<endl;
+//	cin >> age;
+//	cout << "enter youtr salary:"  << endl;
+//	cin >> salary;
+//	cout << "your name is " << str << endl;
+//	cout << "your age is:" << age << endl;
+//	cout << "your salary is:" << salary << endl;
+//	fout << "your name is " << str << endl;
+//	 fout<< "your age is:" << age << endl;
+//	 fout<< "your salary is:" << salary << endl;
+//	 fout.close();
+//	 system("pause");
+//	 return 0;
+//
+//
+//}
+
+
+
+
+//#include<iostream>
+//#include<fstream>
+//#include<cstring>
+//using namespace std;
+//int main(){
+//	ofstream fout;
+//	fout.open("output_4.txt");
+//	char str[100] = {};
+//	cout << "enter string:" << endl;
+//	cin.getline(str, 100);
+//	cout << "the string is:" << str << endl;
+//	fout << "the string is:" << str << endl;
+//	fout.close();
+//	system("pause");
+//	return 0;
+//
+//}
