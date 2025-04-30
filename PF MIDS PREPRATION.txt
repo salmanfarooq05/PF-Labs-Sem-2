@@ -1,0 +1,1382 @@
+/// Section B-01   Group A
+
+//Write a C++ program to input ten numbers(5 positive and 5 negative) and arrange them in such a way that :
+//•	One negative and one positive number appear alternately.
+//•	Among negative numbers, arrange in decreasing absolute value.
+//•	Among positive numbers, arrange in increasing order.
+//Sample output :
+//Sample 1
+//Input :
+//	-9 5 - 13 2 7 - 1 - 15 3 - 2 6
+//	Output :
+//	-15, 2, -13, 3, -9, 5, -2, 6, -1, 7
+//
+//	Sample 2
+//	Input :
+//	-3 4 - 5 1 - 10 6 2 - 1 5 - 2
+//	Output :
+//	-10, 1, -5, 2, -3, 4, -2, 5, -1, 6
+//
+//	Sample 3
+//	Input :
+//	1 - 4 2 - 7 3 - 2 4 - 9 5 - 1
+//	Output :
+//	-9, 1, -7, 2, -4, 3, -2, 4, -1, 5
+//---------------------------------------------------------------------------------------
+//#include <iostream>
+//#include <fstream>
+//using namespace std;
+//
+//void sortPositive(int arr[], int size) {
+//    // Simple Bubble Sort in increasing order
+//    for (int i = 0; i < size - 1; i++) {
+//        for (int j = 0; j < size - 1 - i; j++) {
+//            if (arr[j] > arr[j + 1]) {
+//                int temp = arr[j];
+//                arr[j] = arr[j + 1];
+//                arr[j + 1] = temp;
+//            }
+//        }
+//    }
+//}
+//
+//void sortNegativeByAbs(int arr[], int size) {
+//    // Bubble Sort by decreasing absolute value
+//    for (int i = 0; i < size - 1; i++) {
+//        for (int j = 0; j < size - 1 - i; j++) {
+//            if ((arr[j] * arr[j] < arr[j + 1] * arr[j + 1])) 
+//            {
+//                int temp = arr[j];
+//                arr[j] = arr[j + 1];
+//                arr[j + 1] = temp;
+//            }
+//        }
+//    }
+//}
+//
+//int main() {
+//    int input[10];
+//    int positives[5], negatives[5];
+//    int p = 0, n = 0;
+//
+//    cout << "Enter 10 numbers (5 positive and 5 negative):" << endl;
+//    for (int i = 0; i < 10; i++) {
+//        cin >> input[i];
+//        if (input[i] >= 0 && p < 5) {
+//            positives[p++] = input[i];
+//        }
+//        else if (input[i] < 0 && n < 5) {
+//            negatives[n++] = input[i];
+//        }
+//    }
+//
+//    // Sort the positives (in increasing order)
+//    sortPositive(positives, 5);
+//
+//    // Sort the negatives (by decreasing absolute value)
+//    sortNegativeByAbs(negatives, 5);
+//
+//    // Display output: alternate negative and positive
+//    cout << "Output:\n";
+//    for (int i = 0; i < 5; i++) {
+//        cout << negatives[i] << ", " << positives[i];
+//        if (i != 4) cout << ", ";
+//    }
+//    cout << endl;
+//
+//    return 0;
+//}
+//------------------------------------------------------------------------------------------------------------------------------
+// Task 02
+
+//FitFlex Gym maintains monthly records for its members.Each member has a subscription type and additional services used.Your task is to generate a bill for each member from the file member.txt and write it to gymbill.txt.Also, display the member with the highest bill on the console.
+//Rates:
+//•	Subscription Types :
+//o	Premium(P) = 3500
+//o	Standard(S) = 2000
+//o	Basic(B) = 1000
+//•	Personal Trainer session : 500 per session
+//•	Diet Consultation : 300 per consultation
+//
+//Sample Input file member.txt :
+//	Member Id      Subscription Type     PT Sessions     Diet Consults
+//	M - 101                  P                        4                       2
+//	M - 202                  S                        2                       1
+//	M - 305                  B                        1                       0
+//
+//	Sample Output file gymbill.txt:
+//Member Id      Total Bill
+//M - 101             6300
+//M - 202             3300
+//M - 305             1500
+//
+//Console Output :
+//Member with highest bill is M - 101
+
+//------------------------------------------------------------------------------------------------------------------------------
+//#include <iostream>
+//#include <fstream>
+//using namespace std;
+//
+//int main() {
+//    ifstream infile("member.txt");
+//    ofstream outfile("gymbill.txt");
+//
+//    string memberId;
+//    char subType;
+//    int ptSessions, dietConsults;
+//    int maxBill = 0;
+//    string maxMemberId;
+//
+//    outfile << "Member Id      Total Bill\n";
+//
+//    while (infile >> memberId >> subType >> ptSessions >> dietConsults) {
+//        int subFee = 0;
+//        if (subType == 'P' || subType == 'p')
+//            subFee = 3500;
+//        else if (subType == 'S' || subType == 's')
+//            subFee = 2000;
+//        else if (subType == 'B' || subType == 'b')
+//            subFee = 1000;
+//
+//        int total = subFee + (ptSessions * 500) + (dietConsults * 300);
+//
+//        // Write to gymbill.txt
+//        outfile << memberId << "             " << total << "\n";
+//
+//        // Check for highest bill
+//        if (total > maxBill) {
+//            maxBill = total;
+//            maxMemberId = memberId;
+//        }
+//    }
+//
+//    // Show the member with highest bill
+//    cout << "Member with highest bill is " << maxMemberId << endl;
+//
+//    infile.close();
+//    outfile.close();
+//
+//    return 0;
+//}
+//------------------------------------------------------------------------------------------------------------------------------
+/// Task 03
+
+//You are given a file named employees.txt that contains information about employees in a company.Each record has the following fields :
+//•	Employee ID(cstring)
+//•	Employee Name(cstring)
+//•	Hours Worked(int)
+//•	Hourly Rate(float)
+//
+//Write a program to do the following :
+//1.	Read all employee records from employees.txt.
+//2.	Calculate the Salary = Hours Worked × Hourly Rate for each employee.
+//3.	Display and write to a file payroll_report.txt with columns :
+//o	Employee ID, Name, Hours Worked, Hourly Rate, Salary
+//4.	Prompt the user to enter an Employee ID to search.
+//o	If found, display and write to employee_search.txt all the employee details.
+//o	If not found, show "Employee not found" and write the same to employee_search.txt.
+//5.	Include error handling :
+//o	If employees.txt does not exist, print an error and exit.
+//
+//Sample Input File : employees.txt
+//E101 John 40 15.5
+//E102 Alice 38 16.0
+//E103 Bob 45 14.5
+//E104 Diana 30 18.0
+//E105 Chris 50 20.0
+//E106 Eva 35 17.5
+//E107 Mike 42 19.0
+//
+//Sample Console Output :
+//Employee ID   Name    Hours Rate   Salary
+//------------------------------------------
+//E101          John    40     15.5   620
+//E102          Alice   38     16     608
+//E103          Bob     45     14.5   652.5
+//E104          Diana   30     18     540
+//E105          Chris   50     20     1000
+//E106          Eva     35     17.5   612.5
+//E107          Mike    42     19     798
+//
+//Enter Employee ID to search : E104
+//Employee Found :
+//ID: E104
+//Name : Diana
+//Hours Worked : 30
+//Hourly Rate : 18
+//Salary : 540
+//
+//Sample Output File : payroll_report.txt
+//Employee ID   Name    Hours  Rate   Salary
+//------------------------------------------
+//E101          John    40     15.5   620
+//E102          Alice   38     16     608
+//E103          Bob     45     14.5   652.5
+//E104          Diana   30     18     540
+//E105          Chris   50     20     1000
+//E106          Eva     35     17.5   612.5
+//E107          Mike    42     19     798
+//
+//Sample Output File : employee_search.txt(if found)
+//Employee Found :
+//ID: E104
+//Name : Diana
+//Hours Worked : 30
+//Hourly Rate : 18
+//Salary : 540
+//
+//Sample Output File : employee_search.txt(if not found)
+//Employee not found
+//
+//
+//___________________________________________________________
+//------------------------------------------------------------------------------------------------------------------------------
+//#include <iostream>
+//#include <fstream>
+//using namespace std;
+//
+//int main() {
+//    const int MAX = 100;
+//    char empId[1000] = {0};   // All IDs in a single char array
+//    char empName[1000]{ 0 }; // All names in a single char array
+//    int empHours[MAX]{ 0 };
+//    float empRate[MAX]{ 0 };
+//    float empSalary[MAX]{ 0 };
+//
+//    int count = 0;
+//    int idIndex = 0, nameIndex = 0;
+//
+//    ifstream infile("employees.txt");
+//    if (!infile) {
+//        cout << "Error: employees.txt file not found!" << endl;
+//        return 1;
+//    }
+//
+//    // Read manually word-by-word
+//    char tempId[10], tempName[20];
+//    int tempHours;
+//    float tempRate;
+//
+//    while (infile >> tempId >> tempName >> tempHours >> tempRate) {
+//        // Copy ID into flat char array
+//        for (int i = 0; tempId[i] != '\0'; i++)
+//            empId[idIndex++] = tempId[i];
+//        empId[idIndex++] = '\n';
+//
+//        // Copy Name into flat char array
+//        for (int i = 0; tempName[i] != '\0'; i++)
+//            empName[nameIndex++] = tempName[i];
+//        empName[nameIndex++] = '\n';
+//
+//        empHours[count] = tempHours;
+//        empRate[count] = tempRate;
+//        empSalary[count] = tempHours * tempRate;
+//        count++;
+//    }
+//
+//    infile.close();
+//
+//    // Display and write payroll report
+//    ofstream outfile("payroll_report.txt");
+//    cout << "Employee ID   Name    Hours  Rate   Salary" << endl;
+//    cout << "------------------------------------------" << endl;
+//    outfile << "Employee ID   Name    Hours  Rate   Salary" << endl;
+//    outfile << "------------------------------------------" << endl;
+//
+//    int idPos = 0, namePos = 0;
+//
+//    for (int i = 0; i < count; i++) {
+//        // Extract ID
+//        while (empId[idPos] != '\n') {
+//            cout << empId[idPos];
+//            outfile << empId[idPos];
+//            idPos++;
+//        }
+//        cout << "       ";
+//        outfile << "       ";
+//        idPos++;
+//
+//        // Extract Name
+//        while (empName[namePos] != '\n') {
+//            cout << empName[namePos];
+//            outfile << empName[namePos];
+//            namePos++;
+//        }
+//        cout << "    ";
+//        outfile << "    ";
+//        namePos++;
+//
+//        // Display hours, rate, salary
+//        cout << empHours[i] << "     " << empRate[i] << "   " << empSalary[i] << endl;
+//        outfile << empHours[i] << "     " << empRate[i] << "   " << empSalary[i] << endl;
+//    }
+//
+//    // Search employee by ID
+//    char searchId[10];
+//    cout << "\nEnter Employee ID to search: ";
+//    cin >> searchId;
+//
+//    ofstream searchFile("employee_search.txt");
+//    idPos = 0;
+//    namePos = 0;
+//    bool found = false;
+//
+//    for (int i = 0; i < count; i++) {
+//        char currentId[10];
+//        int j = 0;
+//        while (empId[idPos] != '\n') {
+//            currentId[j++] = empId[idPos++];
+//        }
+//        currentId[j] = '\0';
+//        idPos++;
+//
+//        // Compare searchId with currentId manually
+//        bool match = true;
+//        for (int k = 0; searchId[k] != '\0' || currentId[k] != '\0'; k++) {
+//            if (searchId[k] != currentId[k]) {
+//                match = false;
+//                break;
+//            }
+//        }
+//
+//        if (match) {
+//            cout << "Employee Found:\n";
+//            cout << "ID: " << currentId << endl;
+//
+//            searchFile << "Employee Found:\n";
+//            searchFile << "ID: " << currentId << "\n";
+//
+//            // Get name
+//            char currentName[20];
+//            j = 0;
+//            while (empName[namePos] != '\n') {
+//                currentName[j++] = empName[namePos++];
+//            }
+//            currentName[j] = '\0';
+//            namePos++;
+//
+//            cout << "Name: " << currentName << endl;
+//            cout << "Hours Worked: " << empHours[i] << endl;
+//            cout << "Hourly Rate: " << empRate[i] << endl;
+//            cout << "Salary: " << empSalary[i] << endl;
+//
+//            searchFile << "Name: " << currentName << "\n";
+//            searchFile << "Hours Worked: " << empHours[i] << "\n";
+//            searchFile << "Hourly Rate: " << empRate[i] << "\n";
+//            searchFile << "Salary: " << empSalary[i] << "\n";
+//
+//            found = true;
+//            break;
+//        }
+//        else {
+//            // Skip name if not matching
+//            while (empName[namePos] != '\n') {
+//                namePos++;
+//            }
+//            namePos++;
+//        }
+//    }
+//
+//    if (!found) {
+//        cout << "Employee not found" << endl;
+//        searchFile << "Employee not found" << endl;
+//    }
+//
+//    searchFile.close();
+//    outfile.close();
+//    return 0;
+//}
+
+//  ----------------------------------------Version B-------------------------------------------------------------- 
+
+// Task 01
+//Task 1:                                                                                                                            (10 Marks)
+//Write a C++ program to input ten integers in an array.Create a function to rearrange the elements such that :
+//•	Elements at even indices are in increasing order.
+//•	Elements at odd indices are in decreasing order.
+//Sample output :
+//Sample 1
+//Input :
+//	5 8 1 6 9 3 2 7 4 10
+//	Output :
+//{1, 10, 2, 9, 4, 8, 5, 7, 6, 3}
+//
+//Sample 2
+//Input :
+//	12 3 5 8 9 0 6 1 4 7
+//	Output :
+//{4, 8, 5, 7, 6, 3, 9, 1, 12, 0}
+//
+//Sample 3
+//Input :
+//	11 22 33 44 55 66 77 88 99 100
+//	Output :
+//{11, 100, 33, 88, 55, 66, 77, 44, 99, 22}
+//------------------------------------------------------------------------------------------------------------------------------
+//#include <iostream>
+//using namespace std;
+//
+//// Function to sort even indices in increasing and odd indices in decreasing order
+//void rearrange(int arr[], int size) {
+//    int even[5], odd[5];
+//    int e = 0, o = 0;
+//
+//    // Separate elements by index type
+//    for (int i = 0; i < size; i++) {
+//        if (i % 2 == 0)
+//            even[e++] = arr[i];
+//        else
+//            odd[o++] = arr[i];
+//    }
+//
+//    // Sort even indices (increasing)
+//    for (int i = 0; i < e - 1; i++) {
+//        for (int j = i + 1; j < e; j++) {
+//            if (even[i] > even[j]) {
+//                int temp = even[i];
+//                even[i] = even[j];
+//                even[j] = temp;
+//            }
+//        }
+//    }
+//
+//    // Sort odd indices (decreasing)
+//    for (int i = 0; i < o - 1; i++) {
+//        for (int j = i + 1; j < o; j++) {
+//            if (odd[i] < odd[j]) {
+//                int temp = odd[i];
+//                odd[i] = odd[j];
+//                odd[j] = temp;
+//            }
+//        }
+//    }
+//
+//    // Merge back to main array
+//    e = 0;
+//    o = 0;
+//    for (int i = 0; i < size; i++) {
+//        if (i % 2 == 0)
+//            arr[i] = even[e++];
+//        else
+//            arr[i] = odd[o++];
+//    }
+//}
+//
+//int main() {
+//    int arr[10];
+//
+//    cout << "Enter 10 integers:\n";
+//    for (int i = 0; i < 10; i++)
+//        cin >> arr[i];
+//
+//    rearrange(arr, 10);
+//
+//    cout << "Rearranged array:\n{";
+//    for (int i = 0; i < 10; i++) {
+//        cout << arr[i];
+//        if (i < 9) cout << ", ";
+//    }
+//    cout << "}" << endl;
+//
+//    return 0;
+//}
+//------------------------------------------------------------------------------------------------------------------------------
+// Task 02
+//Task 2:                                                                                                                            (20 Marks)
+//A university hostel calculates fees for students based on room type and services used.Read data from hostel.txt and write total dues to fees.txt.Display the student with the highest dues.
+//Rates :
+//	•	Room Type :
+//o	AC(A) = 5000 / month
+//o	Non - AC(N) = 3000 / month
+//•	Laundry Service = 100 per use
+//•	WiFi = 200 per month
+//
+//Sample Input file hostel.txt:
+//Student Id     Room Type    Months     Laundry Uses     WiFi
+//S - 10              A                   6               10               Y
+//S - 22              N                   4               4                N
+//S - 33              A                   3               2                Y
+//
+//Sample Output file fees.txt:
+//Student Id     Total Dues
+//S - 10              31300
+//S - 22              12400
+//S - 33              16100
+//
+//Console Output :
+//Student with highest dues is S - 10
+
+//------------------------------------------------------------------------------------------------------------------------------
+//#include <iostream>
+//#include <fstream>
+//using namespace std;
+//
+//int main() {
+//    ifstream infile("hostel.txt");
+//    ofstream outfile("fees.txt");
+//
+//    if (!infile) {
+//        cout << "Error: hostel.txt file not found!" << endl;
+//        return 1;
+//    }
+//
+//    char id[10], roomType, wifi;
+//    int months, laundry;
+//    int maxDues = 0;
+//    char maxId[10];
+//
+//    outfile << "Student Id     Total Dues\n";
+//
+//    while (infile >> id >> roomType >> months >> laundry >> wifi) {
+//        int dues = 0;
+//
+//        // Room type
+//        if (roomType == 'A')
+//            dues += 5000 * months;
+//        else if (roomType == 'N')
+//            dues += 3000 * months;
+//
+//        // Laundry
+//        dues += 100 * laundry;
+//
+//        // WiFi
+//        if (wifi == 'Y')
+//            dues += 200 * months;
+//
+//        // Write to output file
+//        outfile << id << "           " << dues << "\n";
+//
+//        // Check max
+//        if (dues > maxDues) {
+//            maxDues = dues;
+//            int i = 0;
+//            while (id[i] != '\0') {
+//                maxId[i] = id[i];
+//                i++;
+//            }
+//            maxId[i] = '\0';
+//        }
+//    }
+//
+//    cout << "Student with highest dues is " << maxId << endl;
+//
+//    infile.close();
+//    outfile.close();
+//    return 0;
+//}
+//------------------------------------------------------------------------------------------------------------------------------
+// Task 03
+//Task 3:                                                                                                                            (20 Marks)
+//You are given an input file named students.txt that contains a list of students and their scores.Each student record has the following fields :
+//•	Student ID(cstring)
+//•	Name(cstring)
+//•	Score(float)
+//Write a program to perform the following tasks :
+//1.	Read all student records from students.txt.
+//2.	Display all student details along with the assigned Grade based on the score and write them to report.txt.
+//Grading Scheme :
+//o	Score ≥ 90 : Grade A
+//o	Score ≥ 80 : Grade B
+//o	Score ≥ 70 : Grade C
+//o	Score ≥ 60 : Grade D
+//o	Score < 60 : Grade F
+//	3.	Prompt the user to enter a Student ID to search.
+//	o	If found, display the student’s details with grade and write them to search_result.txt.
+//	o	If not found, inform the user and write "Student not found" to search_result.txt.
+//	4.	Include the following file - handling conditions :
+//o	If students.txt does not exist, the program should display an error message and exit gracefully.
+//o	After the program ends, search_result.txt should contain either the matched student details or "Student not found".
+//Sample Input File : students.txt :
+//	S001 Alice 88.5
+//	S002 Bob 92.0
+//	S003 Charlie 67.0
+//	S004 David 74.5
+//	S005 Eva 55.0
+//	S006 Frank 81.5
+//	S007 Grace 96.0
+//	S008 Henry 60.0
+//	S009 Irene 78.5
+//	S010 Jack 85.0
+//
+//
+//
+//
+//	Sample Console Output :
+//
+//Student ID   Name        Score   Grade
+//----------------------------------------
+//S001         Alice       88.5    B
+//S002         Bob         92.0    A
+//S003         Charlie     67.0    D
+//S004         David       74.5    C
+//S005         Eva         55.0    F
+//S006         Frank       81.5    B
+//S007         Grace       96.0    A
+//S008         Henry       60.0    D
+//S009         Irene       78.5    C
+//S010         Jack        85.0    B
+//
+//Enter student ID to search : S004
+//
+//Student Found :
+//ID: S004
+//Name : David
+//Score : 74.5
+//Grade : C
+//
+//Sample Output File : report.txt :
+//
+//	Student ID   Name        Score   Grade
+//	----------------------------------------
+//	S001         Alice       88.5    B
+//	S002         Bob         92.0    A
+//	S003         Charlie     67.0    D
+//	S004         David       74.5    C
+//	S005         Eva         55.0    F
+//	S006         Frank       81.5    B
+//	S007         Grace       96.0    A
+//	S008         Henry       60.0    D
+//	S009         Irene       78.5    C
+//	S010         Jack        85.0    B
+//
+//	Sample Output File : search_result.txt(if found) :
+//
+//	Student Found :
+//ID: S004
+//Name : David
+//Score : 74.5
+//Grade : C
+//
+//Sample Output File : search_result.txt(if not found) :
+//
+//	Student not found
+//------------------------------------------------------------------------------------------------------------------------------
+//#include <iostream>
+//#include <fstream>
+//using namespace std;
+//
+//// Function to assign grade based on score
+//char getGrade(float score) {
+//    if (score >= 90) return 'A';
+//    else if (score >= 80) return 'B';
+//    else if (score >= 70) return 'C';
+//    else if (score >= 60) return 'D';
+//    else return 'F';
+//}
+//
+//int main() {
+//    ifstream infile("students.txt");
+//    ofstream report("report.txt");
+//
+//    if (!infile) {
+//        cout << "Error: students.txt file not found!" << endl;
+//        return 1;
+//    }
+//
+//    char id[10], name[20];
+//    float score;
+//
+//    cout << "Student ID   Name        Score   Grade\n";
+//    cout << "----------------------------------------\n";
+//
+//    report << "Student ID   Name        Score   Grade\n";
+//    report << "----------------------------------------\n";
+//
+//    // Write all students with grades to console and file
+//    while (infile >> id >> name >> score) {
+//        char grade = getGrade(score);
+//
+//        // Console output
+//        cout << id << "         " << name << "       " << score << "    " << grade << endl;
+//
+//        // File output
+//        report << id << "         " << name << "       " << score << "    " << grade << endl;
+//    }
+//
+//    infile.close();
+//    report.close();
+//
+//    // Search functionality
+//    ifstream searchfile("students.txt"); // reopen file for searching
+//    ofstream searchout("search_result.txt");
+//
+//    char searchId[10];
+//    cout << "\nEnter student ID to search: ";
+//    cin >> searchId;
+//
+//    bool found = false;
+//    while (searchfile >> id >> name >> score) {
+//        if (strcmp(id, searchId) == 0) {
+//            char grade = getGrade(score);
+//            cout << "\nStudent Found:\n";
+//            cout << "ID: " << id << "\nName: " << name << "\nScore: " << score << "\nGrade: " << grade << endl;
+//
+//            searchout << "Student Found:\n";
+//            searchout << "ID: " << id << "\n";
+//            searchout << "Name: " << name << "\n";
+//            searchout << "Score: " << score << "\n";
+//            searchout << "Grade: " << grade << "\n";
+//            found = true;
+//            break;
+//        }
+//    }
+//
+//    if (!found) {
+//        cout << "\nStudent not found\n";
+//        searchout << "Student not found\n";
+//    }
+//
+//    searchfile.close();
+//    searchout.close();
+//
+//    return 0;
+//}
+
+
+//  -------------------------------Simple reading writing task---------------------
+//Assuming that a text file named FIRST.TXT contains some text written into it, write a function named vowelwords, that reads the file FIRST.TXT and creates a new file named SECOND.TXT, to contain only those words from the file FIRST.TXT which start with a lowercase vowel(i.e., with 'a', 'e', 'i', 'o', 'u').
+//
+//Sample Input File :
+//If FIRST.TXT contains the following :
+//Carry umbrella and overcoat when it rains
+//
+//
+//Sample Output File :
+//Then the SECOND.TXT shall contain :
+//umbrella and overcoat it
+
+
+//#include <iostream>
+//#include <fstream>
+//using namespace std;
+//
+//bool startsWithVowel(string word) {
+//    char ch = word[0];
+//    return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u';
+//}
+//
+//void vowelwords() {
+//    ifstream fin("FIRST.TXT");
+//    ofstream fout("SECOND.TXT");
+//
+//    if (!fin) {
+//        cout << "File FIRST.TXT open nahi ho rahi." << endl;
+//        return;
+//    }
+//
+//    string word;
+//    while (fin >> word) {
+//        if (startsWithVowel(word) && word.length() <= 4) {
+//            fout << word << " ";
+//        }
+//    }
+//
+//    fin.close();
+//    fout.close();
+//}
+//int main() {
+//    vowelwords();
+//    return 0;
+//}
+////------------------------------------------------------------------------------------------------------------------------------
+//Question 2:                                                                                                                   (20)
+//Write C++ program for coffee shop management to help them monitor the production of five different coffee brands from five different countries.You need to define a 1d array to store each country’s coffee production in tons.
+//Write a menu driven program to do the following tasks using functions :
+//	a.Read from user coffee productions in tons in array created above.
+//	b.A function that calculates total production of all the five countries.
+//	c.A function that tells which country has the minimum coffee production.
+//	d.A function to sort the coffee productions of countries in descending order(larger first, then second largest and so on).
+//
+//	Sample Run :
+//Please Select any of the options given below :
+//1.	Input coffee productions of 5 different countries.
+//2.	Calculates the total production.
+//3.	Display the minimum coffee production amongst 5 countries.
+//4.	Sort productions in descending order
+//5.	Exit
+//
+//Select Option : 1
+//Input coffee productions in tons : 257940  224871  2859502  423287   385786
+//
+//Select Option : 2
+//Total production : 4151386
+//Select Option : 3
+//Minimum production : 224871
+//
+//Select Option : 4 :
+//	2859502    423287   385786   257940    224871
+//
+//	Select Option : 5
+//	Exiting …….
+//------------------------------------------------------------------------------------------------------------------------------
+//#include <iostream>
+//using namespace std;
+//
+//// Function to input coffee productions
+//void inputProductions(int coffee[], int size) {
+//    cout << "Input coffee productions in tons: ";
+//    for (int i = 0; i < size; i++) {
+//        cin >> coffee[i];
+//    }
+//}
+//
+//// Function to calculate total production
+//int totalProduction(int coffee[], int size) {
+//    int total = 0;
+//    for (int i = 0; i < size; i++) {
+//        total += coffee[i];
+//    }
+//    return total;
+//}
+//
+//// Function to find minimum production
+//int minProduction(int coffee[], int size) {
+//    int min = coffee[0];
+//    for (int i = 1; i < size; i++) {
+//        if (coffee[i] < min) {
+//            min = coffee[i];
+//        }
+//    }
+//    return min;
+//}
+//
+//// Function to sort productions in descending order
+//void sortDescending(int coffee[], int size) {
+//    for (int i = 0; i < size - 1; i++) {
+//        for (int j = i + 1; j < size; j++) {
+//            if (coffee[i] < coffee[j]) {
+//                int temp = coffee[i];
+//                coffee[i] = coffee[j];
+//                coffee[j] = temp;
+//            }
+//        }
+//    }
+//
+//    // Display after sorting
+//    for (int i = 0; i < size; i++) {
+//        cout << coffee[i] << " ";
+//    }
+//    cout << endl;
+//}
+//
+//int main() {
+//    const int SIZE = 5;
+//    int coffee[SIZE] = { 0 };
+//    int choice;
+//    bool isInputDone = false;
+//
+//    cout << "Coffee Shop Management System\n";
+//
+//    while (true) {
+//        cout << "\nPlease Select any of the options given below:\n";
+//        cout << "1. Input coffee productions of 5 different countries.\n";
+//        cout << "2. Calculate the total production.\n";
+//        cout << "3. Display the minimum coffee production amongst 5 countries.\n";
+//        cout << "4. Sort productions in descending order.\n";
+//        cout << "5. Exit\n";
+//        cout << "Select Option: ";
+//        cin >> choice;
+//
+//        if (choice == 1) {
+//            inputProductions(coffee, SIZE);
+//            isInputDone = true;
+//
+//        }
+//        else if (choice == 2) {
+//            if (isInputDone)
+//                cout << "Total production: " << totalProduction(coffee, SIZE) << endl;
+//            else
+//                cout << "Please input data first (Option 1).\n";
+//
+//        }
+//        else if (choice == 3) {
+//            if (isInputDone)
+//                cout << "Minimum production: " << minProduction(coffee, SIZE) << endl;
+//            else
+//                cout << "Please input data first (Option 1).\n";
+//
+//        }
+//        else if (choice == 4) {
+//            if (isInputDone) {
+//                cout << "Productions in descending order: ";
+//                sortDescending(coffee, SIZE);
+//            }
+//            else {
+//                cout << "Please input data first (Option 1).\n";
+//            }
+//
+//        }
+//        else if (choice == 5) {
+//            cout << "Exiting ……." << endl;
+//            break;
+//
+//        }
+//        else {
+//            cout << "Invalid option. Please try again.\n";
+//        }
+//    }
+//
+//    return 0;
+//}
+//------------------------------------------------------------------------------------------------------------------------------
+
+//Question 1:                                                                                                                   (20)
+//Assuming that a text file named INPUT.TXT contains 15 numbers separated by a space.Write a function named palindromic_numbers, that reads the file INPUT.TXT and creates a new file named PALINDROME.TXT, to contain only those numbers that are palindrome.A number is said to be palindrome if it’s reverse is same as the original number.
+//Sample Input File :
+//If INPUT.TXT contains the following :
+//21  135  565  1782  3421  1111  89  12   11  151   721  82  901  676  78
+//
+//
+//Sample Output File :
+//Then the PALINFROME.TXT shall contain :
+//565 1111 11 151 676
+
+//#include <iostream>
+//#include <fstream>
+//using namespace std;
+//
+//// Function to check if a number is palindrome
+//bool isPalindrome(int num) {
+//    int original = num;
+//    int reverse = 0;
+//
+//    while (num > 0) {
+//        int digit = num % 10;
+//        reverse = reverse * 10 + digit;
+//        num = num / 10;
+//    }
+//
+//    return original == reverse;
+//}
+//
+//// Function to read from INPUT.TXT and write palindromes to PALINDROME.TXT
+//void palindromic_numbers() {
+//    ifstream infile("INPUT.TXT");
+//    ofstream outfile("PALINDROME.TXT");
+//
+//    if (!infile) {
+//        cout << "Error: Cannot open INPUT.TXT" << endl;
+//        return;
+//    }
+//
+//    int num;
+//    while (infile >> num) {
+//        if (isPalindrome(num)) {
+//            outfile << num << " ";
+//        }
+//    }
+//
+//    infile.close();
+//    outfile.close();
+//}
+//int main() {
+//    palindromic_numbers();
+//    cout << "Palindromic numbers have been written to PALINDROME.TXT." << endl;
+//    return 0;
+//}
+//------------------------------------------------------------------------------------------------------------------------------
+//Question 2:                                                                                                                   (20)
+//Write C++ program for “Flight Booking System” by storing 5 flight routes with fares and total fares including 19 % tax.Routes are numbered as 1, 2, 3, 4 and 5 respectively.You need to define a one d array to store fare defined against each route and another one d array to store the total fare by adding 19 % of tax in the defined fare.
+//Write a menu driven program to do the following tasks using functions :
+//	a.Read from user the defined fare against each route in one of the array created above.
+//	b.Calculate the total fare against each route(fare + 19 % tax on fare) and store it in the second array.
+//	c.Tell the route with the minimum total fare.
+//
+//	Sample Run :
+//Please Select any of the options given below :
+//1.	Input fare of route 1, 2, 3, 4 and 5.
+//2.	Display total fares against each route.
+//3.	Tell the route with the minimum fare.
+//4.	Exit
+//
+//Select Option : 1
+//Input fare(for 5 different routes) : 25000 10000 7000 15000   50000
+//
+//Select Option : 2
+//Total calculated fare against each route : 29750   11900   8330  17850  59500
+//Select Option : 3
+//Route # 3 has the minimum fare of 8330
+//
+//Select Option : 4
+//Exiting …….
+//------------------------------------------------------------------------------------------------------------------------------
+//#include <iostream>
+//using namespace std;
+//
+//const int SIZE = 5;
+//
+//// a. Function to input fares
+//void inputFares(int fare[]) {
+//    cout << "Input fare (for 5 different routes): ";
+//    for (int i = 0; i < SIZE; i++) {
+//        cin >> fare[i];
+//    }
+//}
+//
+//// b. Function to calculate total fare with 19% tax
+//void calculateTotalFares(int fare[], int totalFare[]) {
+//    for (int i = 0; i < SIZE; i++) {
+//        totalFare[i] = fare[i] + (fare[i] * 19 / 100);
+//    }
+//}
+//
+//// Function to display total fares
+//void displayTotalFares(int totalFare[]) {
+//    cout << "Total calculated fare against each route: ";
+//    for (int i = 0; i < SIZE; i++) {
+//        cout << totalFare[i] << " ";
+//    }
+//    cout << endl;
+//}
+//
+//// c. Function to find the route with minimum total fare
+//void findMinFareRoute(int totalFare[]) {
+//    int min = totalFare[0];
+//    int index = 0;
+//
+//    for (int i = 1; i < SIZE; i++) {
+//        if (totalFare[i] < min) {
+//            min = totalFare[i];
+//            index = i;
+//        }
+//    }
+//
+//    cout << "Route # " << index + 1 << " has the minimum fare of " << min << endl;
+//}
+//
+//int main() {
+//    int fare[SIZE] = { 0 };
+//    int totalFare[SIZE] = { 0 };
+//    int choice;
+//    bool fareEntered = false;
+//
+//    while (true) {
+//        cout << "\nPlease Select any of the options given below:\n";
+//        cout << "1. Input fare of route 1, 2, 3, 4 and 5.\n";
+//        cout << "2. Display total fares against each route.\n";
+//        cout << "3. Tell the route with the minimum fare.\n";
+//        cout << "4. Exit\n";
+//        cout << "Select Option: ";
+//        cin >> choice;
+//
+//        if (choice == 1) {
+//            inputFares(fare);
+//            calculateTotalFares(fare, totalFare);
+//            fareEntered = true;
+//
+//        }
+//        else if (choice == 2) {
+//            if (fareEntered)
+//                displayTotalFares(totalFare);
+//            else
+//                cout << "Please input fares first (Option 1).\n";
+//
+//        }
+//        else if (choice == 3) {
+//            if (fareEntered)
+//                findMinFareRoute(totalFare);
+//            else
+//                cout << "Please input fares first (Option 1).\n";
+//
+//        }
+//        else if (choice == 4) {
+//            cout << "Exiting ……." << endl;
+//            break;
+//
+//        }
+//        else {
+//            cout << "Invalid option. Please try again.\n";
+//        }
+//    }
+//
+//    return 0;
+//}
+//------------------------------------------------------------------------------------------------------------------------------
+
+//Question 1:
+//15
+//Create a function that receives a CString of size 50, containing only upper case and lower case
+//alphabets.The function will sort the array such that all the lower case alphabets appear before
+//all the upper case alphabets in the CString. (Note: ASCII Code of ‘a’ is 97 and ‘A’ is 65)
+//	Sample Input :
+//Input String : cXdaHklM
+//output : cdaklXHM
+//------------------------------------------------------------------------------------------------------------------------------
+//#include <iostream>
+//#include <cstring>
+//using namespace std;
+//
+//void sortCString(char str[]) {
+//    char lower[50];
+//    char upper[50];
+//    int l = 0, u = 0;
+//
+//    // Separate lowercase and uppercase characters
+//    for (int i = 0; str[i] != '\0'; i++) {
+//        if (str[i] >= 'a' && str[i] <= 'z') {
+//            lower[l++] = str[i];
+//        }
+//        else if (str[i] >= 'A' && str[i] <= 'Z') {
+//            upper[u++] = str[i];
+//        }
+//    }
+//
+//    // Combine lowercase and uppercase characters back into original string
+//    int index = 0;
+//    for (int i = 0; i < l; i++) {
+//        str[index++] = lower[i];
+//    }
+//    for (int i = 0; i < u; i++) {
+//        str[index++] = upper[i];
+//    }
+//    str[index] = '\0'; // Null terminate the string
+//}
+//
+//int main() {
+//    char str[50];
+//    cout << "Input String: ";
+//    cin >> str;
+//
+//    sortCString(str);
+//
+//    cout << "Output: " << str << endl;
+//
+//    return 0;
+//}
+
+//------------------------------------------------------------------------------------------------------------------------------
+//Question 2:
+//15
+//The manager of a football stadium wants you to write a program that calculates the total ticket
+//sales after each game.There are four categories of tickets – box, sideline, premium and general
+//admission.After each game data is stored in a file in the following format.
+//Data.txt
+//categories   ticketPrice    numberOfTicketsSold
+//box
+//250
+//sideline
+//premium
+//general
+//100
+//50
+//25
+//750
+//2800
+//35750
+//1875
+//The first line contains columns heading.
+//The second line indicates the type of the ticket is box, its price is $250 and 750 tickets were sold
+//at that price.
+//Design a menu based program to implement the following options.Perform the given tasks
+//using functions(make as many functions as possible).
+//1. Search the category with the maximum number of tickets sold.
+//2. Display only those categories whose total sales exceeds 10, 000
+//3. Calculate total number of tickets sold
+//Sample Input 1:
+//Please Select One of the following options from the menu given below :
+//1. Search the category with maximum number of tickets sold
+//2. Display categories / y along with their total sales, whose total sales exceeds 100000
+//3. Calculate total Number of tickets sold
+//Input your desired option : 1
+//Category with Maximum Tickets Sold : premium
+//Do you want to continue (y / n) : y
+//Input your desired option : 2
+//sideline has total sales 280000
+//premium has total sales 1787500
+//Do you want to continue (y / n) : y
+//Input your desired option : 3
+//Total tickets sold : 41175
+//Do you want to continue (y / n) : n
+//------------------------------------------------------------------------------------------------------------------------------
+//#include <iostream>
+//#include <fstream>
+//using namespace std;
+//
+//const int SIZE = 4;
+//
+//char category[SIZE][20];     // Ticket category names
+//int price[SIZE];             // Ticket prices
+//int sold[SIZE];              // Tickets sold
+//
+//// Function to read data from file
+//void readData() {
+//    ifstream file("Data.txt");
+//    char h1[20], h2[20], h3[30]; // skip header
+//    file >> h1 >> h2 >> h3;
+//
+//    for (int i = 0; i < SIZE; i++) {
+//        file >> category[i] >> price[i] >> sold[i];
+//    }
+//
+//    file.close();
+//}
+//
+//// Find category with max tickets sold
+//void maxTickets() {
+//    int maxIndex = 0;
+//    for (int i = 1; i < SIZE; i++) {
+//        if (sold[i] > sold[maxIndex]) {
+//            maxIndex = i;
+//        }
+//    }
+//    cout << "Category with Maximum Tickets Sold: " << category[maxIndex] << endl;
+//}
+//
+//// Show categories with total sales > 100000
+//void showHighSales() {
+//    for (int i = 0; i < SIZE; i++) {
+//        int total = price[i] * sold[i];
+//        if (total > 100000) {
+//            cout << category[i] << " has total sales " << total << endl;
+//        }
+//    }
+//}
+//
+//// Show total tickets sold
+//void totalSold() {
+//    int total = 0;
+//    for (int i = 0; i < SIZE; i++) {
+//        total += sold[i];
+//    }
+//    cout << "Total tickets sold: " << total << endl;
+//}
+//
+//// Main program
+//int main() {
+//    readData();
+//    int option;
+//    char again = 'y';
+//
+//    while (again == 'y' || again == 'Y') {
+//        cout << "\n1. Max tickets sold\n";
+//        cout << "2. Categories with sales > 100000\n";
+//        cout << "3. Total tickets sold\n";
+//        cout << "Enter option: ";
+//        cin >> option;
+//
+//        if (option == 1) {
+//            maxTickets();
+//        }
+//        else if (option == 2) {
+//            showHighSales();
+//        }
+//        else if (option == 3) {
+//            totalSold();
+//        }
+//        else {
+//            cout << "Invalid option\n";
+//        }
+//
+//        cout << "Do you want to continue (y/n)? ";
+//        cin >> again;
+//    }
+//
+//    cout << "Exiting...\n";
+//    return 0;
+//}
+//------------------------------------------------------------------------------------------------------------------------------
+
+//Write a Complete C++ Program that(USE ARRAYS ONLY FOR CSTRINGS)
+//1. Reads these data types : float, int, double, long, char and CString of values, from the user consecutively in one line
+//2. Check if the character is an English character or not and display on screen
+//3. Reverse each CString and display on screen
+//4. Multiply int and long type variable with 2 and display on screen
+//5. Calculate Average of float and double data type variables and display on screen
+//Constraints :
+//• Main can’t have cin or mathematics
+//• int and double are passed by value, other types are passed by reference
+//• Must use at least one function for each of the items above
+//Sample Output Screen :
+//Enter in one line values for float, int, double, long, char and CString : 12.5 125 235.987 987654 % Values
+//Character % is not an English Character
+//CString Values in reverse is seulaV
+//125 * 2 = 250, 987654 * 2 = 1975308
+//Average of 12.5 & 235.987 is 124.24
+//------------------------------------------------------------------------------------------------------------------------------
+
+//#include <iostream>
+//using namespace std;
+//
+//// Function to read all input values
+//void readInput(float& f, int& i, double& d, long& l, char& ch, char str[]) {
+//    cout << "Enter in one line values for float, int, double, long, char and CString: ";
+//    cin >> f >> i >> d >> l >> ch >> str;
+//}
+//
+//// Function to check if character is an English letter
+//void checkChar(char& ch) {
+//    if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z')) {
+//        cout << "Character " << ch << " is an English Character" << endl;
+//    }
+//    else {
+//        cout << "Character " << ch << " is not an English Character" << endl;
+//    }
+//}
+//
+//// Function to reverse CString
+//void reverseCString(char str[]) {
+//    int len = 0;
+//    while (str[len] != '\0') {
+//        len++;
+//    }
+//
+//    cout << "CString " << str << " in reverse is ";
+//    for (int i = len - 1; i >= 0; i--) {
+//        cout << str[i];
+//    }
+//    cout << endl;
+//}
+//
+//// Function to multiply int and long by 2
+//void multiplyIntLong(int i, long& l) {
+//    cout << i << " * 2 = " << (i * 2) << ", " << l << " * 2 = " << (l * 2) << endl;
+//}
+//
+//// Function to calculate average of float and double
+//void averageFloatDouble(float& f, double d) {
+//    double avg = (f + d) / 2;
+//    cout << "Average of " << f << " & " << d << " is " << avg << endl;
+//}
+//
+//// Main function
+//int main() {
+//    float f;
+//    int i;
+//    double d;
+//    long l;
+//    char ch;
+//    char str[50];
+//
+//    readInput(f, i, d, l, ch, str);
+//    checkChar(ch);
+//    reverseCString(str);
+//    multiplyIntLong(i, l);
+//    averageFloatDouble(f, d);
+//
+//    return 0;
+//}
+//
+////------------------------------------------------------------------------------------------------------------------------------
+//
+//
+//Write a Complete C++ Program that
+//1. Reads Decimals from a text file(path provided by the user)
+//2. Count number of digits of Whole and Fraction Part of each Decimal and Display on Screen
+//3. Calculate the Sum of Digits of Whole and Fraction Part and Display both Sums on Screen
+//4. Find First digit of Whole Part and Last Digit of the Fraction Part of each Decimal and display on screen
+//5. Display Whole and Fraction Part of  Each Decimal and Display on Screen
+//Constraints :
+//• Main can’t have cin, file reading or mathematics
+//• All Functions pass parameters by Reference Only
+//• Must use at least one function for each of the items above
+//Sample Output Screen : for text file “decimals.txt”
+//Read Decimals from file “integers.txt”
+//Count of Number of Digits of Whole Part of Each decimal : 3 2 3 1 1
+//Count of Number of Digits of Fraction Part of Each decimal : 2 4 1 3 2
+//Sum of Digits of Whole Part of Each decimal : 7 5 19 9 5
+//Sum of Digits of Fraction Part of Each decimal : 5 14 3 10 13
+//First Digit of Whole Part and last Digit Fraction Part of Each decimal : 2 3 4 6 7 3 9 1 5 7
+//Whole and Fraction Part of each Decimal are 223 23 41 1256 784 3 9 181 5 67
+
+//------------------------------------------------------------------------------------------------------------------------------
